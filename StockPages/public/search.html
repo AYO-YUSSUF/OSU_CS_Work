@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Search</title>
+</head>
+<body>
+    
+    <h1>Find A Stock!</h1>
+
+    <p>You can use this page to find the stock that is currently either the cheapest or most expensive option, from our specially curated list of hot stocks!</p>
+
+    <form action="/highLow" method="POST">
+
+        <p>You can choose to look up either the cheapest or most expensive stock availabe.</p>
+
+        <p>I would like to look up the:</p>
+
+        <p></p><input type="radio" name="price" id="high" value="high">
+        <label for="high">Most Expensive</label></p>
+        <p></p><input type="radio" name="price" id="low" value="low">
+        <label for="low">Cheapest</label></p>
+
+        <p><button type="submit">Look up stock information</button></p>
+
+    </form>
+
+</body>
+</html>
