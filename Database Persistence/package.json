@@ -1,11 +1,11 @@
 {
-  "name": "movies",
+  "name": "users",
   "version": "1.0.0",
   "description": "",
-  "main": "movies_controller.mjs",
+  "main": "users_controller.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon movies_controller.mjs"
+    "start": "nodemon users_controller.mjs"
   },
   "author": "",
   "license": "ISC",

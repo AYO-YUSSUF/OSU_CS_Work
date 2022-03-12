@@ -18,6 +18,7 @@ db.once('open', () => {
 /**
  * Define the schema
  */
+
 const userschema = mongoose.Schema({
     name: { type: String, required: true },
     age: { type: Number, required: true },
@@ -26,9 +27,10 @@ const userschema = mongoose.Schema({
 });
 
 /**
- * Compile the model from the schema. This must be done after defining the schema.
+ * Compile the model from the schema
  */
-const user = mongoose.model("user", userschema);
+
+const User = mongoose.model("user", userschema);
 
 /**
  * Create a user
@@ -38,16 +40,10 @@ const user = mongoose.model("user", userschema);
  * @param {Number} phoneNumber 
  * @returns A promise. Resolves to the JSON object for the document created by calling save
  */
-const createUser = async (name, age, email) => {
-    // Call the constructor to create an instance of the model class user
-    const user = new user({ name: name, age: age, email: email });
-    // Call save to persist this object as a document in MongoDB
-    return user.save();
-}
 
-const createUser = async (name, age, email, phoneNumber) => {
+const createUser = async (name, age, email, phoneNumber = null) => {
     // Call the constructor to create an instance of the model class user
-    const user = new user({ name: name, age: age, email: email, phoneNumber: phoneNumber });
+    const user = new User({ name: name, age: age, email: email, phoneNumber: phoneNumber });
     // Call save to persist this object as a document in MongoDB
     return user.save();
 }
@@ -59,8 +55,9 @@ const createUser = async (name, age, email, phoneNumber) => {
  * @param {Number} limit 
  * @returns 
  */
+
 const findUsers = async (filter, projection, limit) => {
-    const query = user.find(filter)
+    const query = User.find(filter)
         .select(projection)
         .limit(limit);
     return query.exec();
@@ -75,16 +72,24 @@ const findUsers = async (filter, projection, limit) => {
  * @param {Number} phoneNumber
  * @returns A promise. Resolves to the number of documents modified
  */
-const replaceUser = async (_id, name, age, email) => {
-    const result = await user.replaceOne({ _id: _id },
-        { name: name, age: age, email: email });
-    return result.modifiedCount;
-}
 
 const replaceUser = async (_id, name, age, email, phoneNumber) => {
-    const result = await user.replaceOne({ _id: _id },
-        { name: name, age: age, email: email, phoneNumber: phoneNumber });
-    return result.modifiedCount;
+
+    if (name != undefined) {
+        const result = await User.findByIdAndUpdate({_id: _id}, {name: name} )
+    }
+    if (age != undefined) {
+        const result = await User.findByIdAndUpdate({_id: _id}, {age: age} )
+    }
+    if (email != undefined) {
+        const result = await User.findByIdAndUpdate({_id: _id}, {email: email} )
+    }
+    if (phoneNumber != undefined) {
+        const result = await User.findByIdAndUpdate({_id: _id}, {phoneNumber: phoneNumber} )
+    }
+
+    return 1;
+
 }
 
 /**
@@ -92,9 +97,10 @@ const replaceUser = async (_id, name, age, email, phoneNumber) => {
  * @param {String} _id 
  * @returns A promise. Resolves to the count of deleted documents
  */
-const deleteById = async (_id) => {
-    const result = await user.deleteOne({ _id: _id });
-    // Return the count of deleted document. Since we called deleteOne, this will be either 0 or 1.
+
+const deleteById = async (field) => {
+    const result = await User.deleteMany({ field: field });
+    
     return result.deletedCount;
 }
 

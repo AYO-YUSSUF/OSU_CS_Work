@@ -4,6 +4,24 @@ const app = express();
 
 const PORT = 3000;
 
+let retrieveWithParam = 0;
+let retrieveNoParam = 0;
+let retrieveCount = 0;
+
+app.use("/retrieve", (req, res, next) => {
+    
+    retrieveCount++;
+    (Object.keys(req.query).length) == 0 ? retrieveNoParam++ : retrieveWithParam++;
+
+    if ((retrieveCount) % 10 == 0) {
+        console.log("Total retrieve requests : " + retrieveCount);
+        console.log("Retrieve requests with 0 query parameters: " + retrieveNoParam);
+        console.log("Retrieve requests with 1 or more query parameters: " + retrieveWithParam);
+    }
+
+    next()
+  })
+
 /**
  * Create a new user with the name, age, email, and (optional) phone number provided in the query parameters
  */
@@ -20,22 +38,11 @@ app.get("/create", (req, res) => {
 });
 
 /**
- * Retrive users. 
- * If the query parameters include a 
- * 
- * 
- * FIX THIS RIGHT HERE, 
- * 
- * 
- * then only the users for that year are returned.
- * Otherwise, all users are returned.
+ * Retrieve users. 
  */
 app.get("/retrieve", (req, res) => {
     console.log(req.query);
-    // Is there a query parameter named AND THIS? If so add a filter based on its value.
-    const filter = req.query.year === undefined
-        ? {}
-        : { year: req.query.year };
+    const filter = req.query;
     users.findUsers(filter, '', 0)
         .then(users => {
             console.log(users)
@@ -70,7 +77,7 @@ app.get("/update", (req, res) => {
  */
 app.get("/delete", (req, res) => {
     console.log(req.query);
-    users.deleteById(req.query._id)
+    users.deleteById(req.query._id, req.query.name, req.query.age, req.query.email, req.query.phoneNumber)
         .then(deletedCount => {
             console.log(deletedCount);
             res.send({ deletedCount: deletedCount });

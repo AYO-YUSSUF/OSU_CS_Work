@@ -1,0 +1,126 @@
+### Request 1: Create user 1
+### Response: New user
+GET http://localhost:3000/create?name=Ava Walker&age=27&email=ava.walker@example.com&phoneNumber=6505848540
+
+### Request 2: Create user 2
+### Response: New user
+GET http://localhost:3000/create?name=Arnold Owens&age=24&email=arnold.owens@example.com&phoneNumber=7074540929
+
+### Request 3: Create user 3 - no phone number
+### Response: New user
+GET http://localhost:3000/create?name=Javier Sanders&age=61&email=javier.sanders@example.com
+
+### Request 4: Create user 4
+### Response: New user
+GET http://localhost:3000/create?name=Bobby Hamilton&age=27&email=bobby.hamilton@example.com&phoneNumber=16817174606
+
+### Request 5: Create user 5
+### Response: New user
+http://localhost:3000/create?name=Brett Jimenez&age=65&email=brett.jimenez@example.com&phoneNumber=3703831407
+
+### Request 6: Create user 6
+### Response: New user
+http://localhost:3000/create?name=Cher Gray&age=27&email=cher@example.com&phoneNumber=8114482
+
+### Request 7: Retrieve all users
+### Response: 6 users
+### Run this request a total of 5 times to update statistics.
+GET http://localhost:3000/retrieve
+
+### Request 8: Retrieve by _id
+### TODO: Update _id to Cher Gray's id before sending the request
+### Response: 1 user, Cher Gray
+GET http://localhost:3000/retrieve?_id=6215a919ff6ffa18b75d9c7f
+
+### Request 9: Retrieve by name
+### Response: 1 user
+GET http://localhost:3000/retrieve?name=Bobby Hamilton
+
+### Request 10: Retrieve by email
+### Response: 1 user
+GET http://localhost:3000/retrieve?email=cher@example.com
+
+### Request 11: Retrieve by age
+### Response: 3 users
+GET http://localhost:3000/retrieve?age=27
+
+### Request 12: Retrieve by phone
+### Response: 1 user, Cher Gray
+### This is the 10th request for retrieve, 5 with 0 params, 5 with 1 or more params
+### Stats must be printed
+GET http://localhost:3000/retrieve?phoneNumber=8114482
+
+### Request 13: Retrieve by name and age
+### Response: 1 user
+GET http://localhost:3000/retrieve?name=Bobby Hamilton&age=27
+
+
+### Request 14: Retrieve by name and age
+### Response: Empty array
+GET http://localhost:3000/retrieve?name=Bobby Hamilton&age=28
+
+
+### Request 15: Retreive by name, age, email, phoneNumber
+### Response: 1 user
+GET http://localhost:3000/retrieve?name=Cher Gray&age=27&email=cher@example.com&phoneNumber=8114482                             
+
+### Request 16: Update Cher Gray. modifiedCount must be 1
+### TODO: Update _id to Cher Gray's id before sending the request. 
+### Response: {  "modifiedCount": 1 }
+http://localhost:3000/update?_id=6215a919ff6ffa18b75d9c7f&age=28&phoneNumber=12193456
+
+### Request 17: Update all properties of Brett Jimenez. modifiedCount must be 1
+### TODO: Update _id to Brett Jimenez's id before sending the request. 
+### Response: {  "modifiedCount": 1 }
+http://localhost:3000/update?_id=6215a917ff6ffa18b75d9c7d&name=Brad Jimenez&age=66&email=brad.jimenez@example.com&phoneNumber=3703831408
+
+
+### Request 18: Update using non-existent id
+### Response: { "Error" : "Not found"}
+http://localhost:3000/update?_id=61015ac80991b44b4c49eeaf&age=28&phoneNumber=12193456            
+
+### Request 19: Retrieve by phone
+### Response: 1 user
+GET http://localhost:3000/retrieve?phoneNumber=12193456
+
+### Request 20: Retrieve by age
+### Response: 2 users
+GET http://localhost:3000/retrieve?age=27
+
+### Request 21: Retrieve by age
+### Response: Empty array
+GET http://localhost:3000/retrieve?age=21
+
+### Request 22: Delete by _id 
+### TODO: Update _id to Cher Gray's id before sending the request
+### Response: { "deletedCount": 1 }
+GET http://localhost:3000/delete?_id=6215a2c63c7354b36436739f
+
+### Request 23: Delete by _id 
+### Response: { "deletedCount": 0 }
+GET http://localhost:3000/delete?_id=61ff082155f7d74dc61804b8          
+
+
+### Request 24: Delete by name
+### Response: { "deletedCount": 1 }
+GET http://localhost:3000/delete?name=Javier Sanders
+
+### Request 25: Delete by age
+### Response: { "deletedCount": 2 }
+GET http://localhost:3000/delete?age=27
+
+### Request 26: Retrieve by age
+### Response: Empty array
+GET http://localhost:3000/retrieve?age=27
+
+### Request 27: Delete by email
+### Response: { "deletedCount": 1 }
+GET http://localhost:3000/delete?email=arnold.owens@example.com 
+
+### Request 28: Delete by phoneNumber
+### Response: { "deletedCount": 1 }
+GET http://localhost:3000/delete?phoneNumber=3703831408
+
+### Request 29: Retrieve all users
+### Response: Empty array
+GET http://localhost:3000/retrieve
