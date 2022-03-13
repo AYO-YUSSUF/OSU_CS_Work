@@ -24,14 +24,17 @@ function HomePage({ setExerciseToEdit }) {
     }
 
     const onDelete = async id => {
+
         const response = await fetch(`/exercises/${id}`, { method: 'DELETE' });
+
         if (response.status === 204) {
-        const getResponse = await fetch('/exercises');
-        const exercises = await getResponse.json();
-        setExercises(exercises);
+            const getResponse = await fetch('/exercises');
+            const exercises = await getResponse.json();
+            setExercises(exercises);
         } else {
-        console.error(`Failed to delete exercise with id = ${id}, status code = ${response.status}`)
-        }
+            console.error(`Failed to delete exercise with id = ${id}, status code = ${response.status}`)
+        }   
+
     }	
 
     return (
@@ -41,7 +44,7 @@ function HomePage({ setExerciseToEdit }) {
                     onDelete={onDelete}
                     onEdit={onEdit}>
             </ExerciseList>
-            <Link to="/add-exercise">Add a exercise</Link>
+            <Link to="/add-exercise">Add an exercise</Link>
         </>
     );
 }

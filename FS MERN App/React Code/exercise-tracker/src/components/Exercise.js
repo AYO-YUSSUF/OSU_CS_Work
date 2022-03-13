@@ -1,6 +1,7 @@
 import React from 'react';
+import { FiDelete, FiEdit } from 'react-icons/fi'
 
-function Exercise({ exercise }) {
+function Exercise({ exercise, onDelete, onEdit }) {
     return (
         <tr>
             <td>{exercise.name}</td>
@@ -8,8 +9,8 @@ function Exercise({ exercise }) {
             <td>{exercise.weight}</td>
             <td>{exercise.unit}</td>
             <td>{exercise.date}</td>
-            <td>Edit</td>
-            <td>Delete</td>
+            <td><FiEdit onClick={() => onEdit(exercise)} class="pointer" /></td>
+            <td><FiDelete onClick={() => onDelete(exercise._id)} class="pointer" /></td>
         </tr>
     );
 }
