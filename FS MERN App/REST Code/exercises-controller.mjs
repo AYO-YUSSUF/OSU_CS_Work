@@ -3,7 +3,6 @@ import express from 'express';
 const app = express();
 const PORT = 3000;
 
-const router = express.Router();
 app.use(express.json());
 
 /**
@@ -13,11 +12,11 @@ app.post("/exercises", (req, res) => {
     console.log(req.body);
     exercises.createExercise(req.body.name, req.body.reps, req.body.weight, req.body.unit, req.body.date)
         .then(exercise => {
-            res.send(exercise);
+            res.status(201).send(exercise);
         })
         .catch(error => {
             console.error(error);
-            res.send({ error: 'Request failed' });
+            res.status(500).send({ error: 'Request failed' });
         });
 });
 
@@ -35,7 +34,7 @@ app.get("/exercises", (req, res) => {
         })
         .catch(error => {
             console.error(error);
-            res.send({ error: 'Request failed' });
+            res.status(500).send({ error: 'Request failed' });
         });
 
 });
@@ -57,24 +56,30 @@ app.put("/exercises/:id", (req, res) => {
         })
         .catch(error => {
             console.error(error);
-            res.send({ error: 'Request failed' });
+            res.status(500).send({ error: 'Request failed' });
         });
 });
 
 /**
  * Delete the exercise whose _id is provided in the body parameters
  */
-app.delete("/exercises/_id", (req, res) => {
+app.delete("/exercises/:id", (req, res) => {
+
     console.log(req.body);
-    exercises.deleteById(req.body._id)
+
+    // Grabs the exercise ID from the URL passed into the function
+    let requestSegments = req.path.split('/');
+
+    exercises.deleteById(requestSegments[2])
         .then(deletedCount => {
             console.log(deletedCount);
-            res.send({ deletedCount: deletedCount });
+            res.status(204).send({ deletedCount: deletedCount });
         })
         .catch(error => {
             console.error(error);
-            res.send({ error: 'Request failed' });
+            res.status(500).send({ error: 'Request failed' });
         });
+
 });
 
 app.listen(PORT, () => {
