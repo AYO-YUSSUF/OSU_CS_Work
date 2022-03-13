@@ -1,5 +1,5 @@
 import * as exercises from './exercises-model.mjs';
-import express from 'express';
+import express, { urlencoded } from 'express';
 const app = express();
 const PORT = 3000;
 
@@ -8,7 +8,7 @@ app.use(express.json());
 /**
  * Create a new exercise with the name, reps, weight, unit, and date provided in the body parameters
  */
-app.post("/exercises", (req, res) => {
+app.post('/exercises', (req, res) => {
     console.log(req.body);
     exercises.createExercise(req.body.name, req.body.reps, req.body.weight, req.body.unit, req.body.date)
         .then(exercise => {

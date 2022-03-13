@@ -13,6 +13,7 @@ export const AddExercisePage = () => {
 
     const addExercise = async () => {
         const newExercise = { name, reps, weight, unit, date };
+        
         const response = await fetch('/exercises', {
             method: 'POST',
             body: JSON.stringify(newExercise),
