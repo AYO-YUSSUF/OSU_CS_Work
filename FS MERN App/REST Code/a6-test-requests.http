@@ -28,7 +28,7 @@ GET http://localhost:3000/exercises HTTP/1.1
 
 ### Edit the Deadlift. 
 ### NOTE: Set ID to the ID for Deadlift
-PUT http://localhost:3000/exercises/610e523255de4c51c4a3d1db HTTP/1.1
+PUT http://localhost:3000/exercises/622d48745e072c5d082794bf HTTP/1.1
 content-type: application/json
 
 {
