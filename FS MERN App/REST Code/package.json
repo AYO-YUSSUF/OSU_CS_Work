@@ -5,7 +5,7 @@
   "main": "exercises-controller.mjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "exercises-controller.mjs"
+    "start": "nodemon exercises-controller.mjs"
   },
   "author": "",
   "license": "ISC",

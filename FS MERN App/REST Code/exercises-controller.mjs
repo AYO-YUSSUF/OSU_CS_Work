@@ -1,15 +1,17 @@
 import * as exercises from './exercises-model.mjs';
 import express from 'express';
 const app = express();
-
 const PORT = 3000;
 
+const router = express.Router();
+app.use(express.json());
+
 /**
- * Create a new exercise with the name, reps, weight, unit, and date provided in the query parameters
+ * Create a new exercise with the name, reps, weight, unit, and date provided in the body parameters
  */
-app.get("/create", (req, res) => {
-    console.log(req.query);
-    exercises.createExercise(req.query.name, req.query.reps, req.query.weight, req.query.unit, req.query.date)
+app.post("/exercises", (req, res) => {
+    console.log(req.body);
+    exercises.createExercise(req.body.name, req.body.reps, req.body.weight, req.body.unit, req.body.date)
         .then(exercise => {
             res.send(exercise);
         })
@@ -22,9 +24,9 @@ app.get("/create", (req, res) => {
 /**
  * Retrive exercises
  */
-app.get("/retrieve", (req, res) => {
-    console.log(req.query);
-    // Is there a query parameter named reps? If so add a filter based on its value.
+app.get("/exercises", (req, res) => {
+    console.log(req.body);
+    // Is there a body parameter named reps? If so add a filter based on its value.
     
     exercises.findExercises({}, '', 0)
         .then(exercises => {
@@ -40,11 +42,15 @@ app.get("/retrieve", (req, res) => {
 
 /**
  * Update the exercise whose _id is provided and set its name, reps, weight, unit, and date to
- * the values provided in the query parameters
+ * the values provided in the body parameters
  */
-app.get("/update", (req, res) => {
-    console.log(req.query);
-    exercises.replaceExercise(req.query._id, req.query.name, req.query.reps, req.query.weight, req.query.unit, req.query.date)
+app.put("/exercises/:id", (req, res) => {
+    console.log(req.body);
+
+    // Grabs the exercise ID from the URL passed into the function
+    let requestSegments = req.path.split('/');
+    
+    exercises.replaceExercise(requestSegments[2], req.body.name, req.body.reps, req.body.weight, req.body.unit, req.body.date)
         .then(updateCount => {
             console.log(updateCount);
             res.send({ updateCount: updateCount });
@@ -56,11 +62,11 @@ app.get("/update", (req, res) => {
 });
 
 /**
- * Delete the exercise whose _id is provided in the query parameters
+ * Delete the exercise whose _id is provided in the body parameters
  */
-app.get("/delete", (req, res) => {
-    console.log(req.query);
-    exercises.deleteById(req.query._id)
+app.delete("/exercises/_id", (req, res) => {
+    console.log(req.body);
+    exercises.deleteById(req.body._id)
         .then(deletedCount => {
             console.log(deletedCount);
             res.send({ deletedCount: deletedCount });
