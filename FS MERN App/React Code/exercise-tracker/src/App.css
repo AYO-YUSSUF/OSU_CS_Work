@@ -1,5 +1,8 @@
 body {
-  background-color: rgb(255,255,255);
+  background-color: #424651;
+  background-image: url("/beefcake.jpeg");
+  background-size: 100%;
+  background-position: center;
 }
 
 .App {
@@ -7,7 +10,18 @@ body {
 }
 
 .App-header {
-  min-height: 100vh;
+  min-height: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(5px + 2vmin);
+  color: black;
+  background-color: #21FA90;
+}
+
+.App-body {
+  min-height: 50vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,8 +30,33 @@ body {
   color: black;
 }
 
+.App-footer {
+  background-color: #21FA90;
+  position:absolute;
+    width:100%;
+    bottom:0px;
+}
+
 .App-link {
   color: #61dafb;
+}
+
+.navBarLink1 {
+  margin: 10px;
+  font-size: calc(10px + 2vmin);
+  background-color: #AF3B6E;
+  color: white;
+}
+
+.navBarLink2 {
+  margin: 10px;
+  font-size: calc(10px + 2vmin);
+  background-color: #BCE7FD;
+}
+
+.AddEx {
+  background-color: #AF3B6E;
+  padding: 8px;
 }
 
 td, th {
@@ -25,14 +64,22 @@ td, th {
   padding: 8px;
 }
 
-tr:nth-child(even){background-color: #f2f2f2;}
+tr:nth-child(even){
+  background-color: #AF3B6E;
+}
+tr:nth-child(odd){
+  background-color: #BCE7FD;
+  color: black;
+}
 
-tr:hover {background-color: #ddd;}
+tr:hover {
+  background-color: #21FA90;
+  color: black;
+}
 
 th {
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
+  text-align: center;
+  background-color: #C492B1;
 }
